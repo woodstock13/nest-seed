@@ -1,0 +1,21 @@
+version: '3.4'
+services:
+  back:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+      # dockerfile: Dockerfile.test
+    image: devops/nest-sample:latest
+    container_name: nest-sample
+    restart: always
+    ports:
+      - '3000:3000'
+    environment:
+      NODE_ENV: 'local'
+    expose:
+      - 3000
+    volumes:
+      - type: bind
+        source: ./src
+        target: /nest-sample/src
+    tty: true
