@@ -2,18 +2,22 @@ import { Injectable } from '@nestjs/common';
 import { CreateTalkDto } from './dto/create-talk.dto';
 import { UpdateTalkDto } from './dto/update-talk.dto';
 
+const sessions = require('../../../data/sessions.json');
+const _ = require('lodash');
+
 @Injectable()
 export class TalksService {
   create(createTalkDto: CreateTalkDto) {
     return 'This action adds a new talk';
   }
 
-  findAll() {
-    return `This action returns all talks`;
+  getAllTalks() {
+    return _.filter(sessions);
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} talk`;
+  getOneTalk(id) {
+    const session = _.filter(sessions, { id: parseInt(id) });
+    return session[0];
   }
 
   update(id: number, updateTalkDto: UpdateTalkDto) {

@@ -2,7 +2,9 @@ import { Controller, Get, Post, Body, Put, Param, Delete } from '@nestjs/common'
 import { TalksService } from './talks.service';
 import { CreateTalkDto } from './dto/create-talk.dto';
 import { UpdateTalkDto } from './dto/update-talk.dto';
+import {ApiTags} from "@nestjs/swagger";
 
+@ApiTags("Talks")
 @Controller('talks')
 export class TalksController {
   constructor(private readonly talksService: TalksService) {}
@@ -12,14 +14,19 @@ export class TalksController {
     return this.talksService.create(createTalkDto);
   }
 
+  @Get('/hi')
+  hello() {
+    return 'hi'
+  }
+
   @Get()
   findAll() {
-    return this.talksService.findAll();
+    return this.talksService.getAllTalks();
   }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.talksService.findOne(+id);
+    return this.talksService.getOneTalk(id);
   }
 
   @Put(':id')
