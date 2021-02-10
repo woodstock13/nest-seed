@@ -1,5 +1,5 @@
-export class Talk {
-    id: string
+export interface ITalk {
+    id: number
     description: string
     startsAt: string
     endsAt: string

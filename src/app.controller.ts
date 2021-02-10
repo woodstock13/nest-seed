@@ -14,18 +14,8 @@ export class AppController {
     return { message };
   }
 
-  @Get('ping')
+  @Get('/ping')
   ping() {
-    return 'hi you';
-  }
-
-  @Get('test')
-  test() {
-    return 'test';
-  }
-
-  @Get('test2')
-  test2() {
-    return 'test2';
+    return 'ping'
   }
 }

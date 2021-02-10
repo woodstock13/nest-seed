@@ -1,15 +1,13 @@
-import { Injectable } from '@nestjs/common';
-import { CreateTalkDto } from './dto/create-talk.dto';
-import { UpdateTalkDto } from './dto/update-talk.dto';
+import {Injectable} from '@nestjs/common';
+import {CreateTalkDto} from './dto/create-talk.dto';
+import {UpdateTalkDto} from './dto/update-talk.dto';
+import {ITalk} from "./entities/talk.entity";
 
-const sessions = require('../../../data/sessions.json');
 const _ = require('lodash');
+let sessions : ITalk[] = require('../../../data/sessions.json');
 
 @Injectable()
 export class TalksService {
-  create(createTalkDto: CreateTalkDto) {
-    return 'This action adds a new talk';
-  }
 
   getAllTalks() {
     return _.filter(sessions);
@@ -21,10 +19,32 @@ export class TalksService {
   }
 
   update(id: number, updateTalkDto: UpdateTalkDto) {
-    return `This action updates a #${id} talk`;
+    const index: number = _.findIndex(sessions, (talk: ITalk) => {
+      if(talk.id === id) {
+        return talk
+      }
+    })
+    if(index !== undefined) {
+      return _.assign(sessions[index], updateTalkDto)
+    }
+    // todo erase + replace file with fs by sessions
+    return undefined;
   }
 
   remove(id: number) {
-    return `This action removes a #${id} talk`;
+    console.log(sessions.length)
+    _.remove(sessions, (talk: ITalk) => {
+      if(talk.id === id) {
+        return talk
+      }
+    })
+    console.log(sessions.length)
+    // todo erase + replace file with fs by sessions
+    return `This talk : ${id} has been deleted`;
+  }
+
+  // TODO
+  create(createTalkDto: CreateTalkDto) {
+    return 'This action adds a new talk';
   }
 }
