@@ -17,7 +17,7 @@ import { ApiBadRequestResponse, ApiNotFoundResponse, ApiOkResponse, ApiTags } fr
 import { TalkAPI } from "./dto/openApi-talk.dto"
 import { updateJsonFile } from "../../common/utils/fs.utils"
 
-@ApiTags("Talks")
+@ApiTags("DavTalks")
 @Controller("talks")
 export class TalksController {
     constructor(private readonly talksService: TalksService) {}
@@ -41,6 +41,7 @@ export class TalksController {
         return selectedTalk
     }
 
+    // TODO fix later
     @Put(":id")
     @ApiOkResponse({
         description: "Get one specific talk",

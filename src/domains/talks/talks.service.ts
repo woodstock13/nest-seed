@@ -19,13 +19,11 @@ export class TalksService {
     }
 
     update(id: number, updateTalkDto: UpdateTalkDto) {
-        console.log("items at the start:", sessions.length)
         const index: number = _.findIndex(sessions, (talk: ITalk) => {
             if (talk.id === id) {
                 return talk
             }
         })
-        console.log("items at the end:", sessions.length)
         if (index !== -1) {
             sessions[index] = _.assign(sessions[index], updateTalkDto)
             updateJsonFile(sessions).then(() => console.log("json file updated"))
@@ -35,17 +33,24 @@ export class TalksService {
     }
 
     remove(id: number) {
+        console.log("items at the start:", sessions.length)
+
         _.remove(sessions, (talk: ITalk) => {
             if (talk.id === id) {
                 return talk
             }
         })
+
+        console.log("items at the end:", sessions.length)
         // todo : handle error here
+
+        // could be a database rather than a simple file.
         updateJsonFile(sessions).then(() => console.log("json file updated"))
+
         return `This talk : ${id} has been deleted`
     }
 
-    // TODO
+    // TODO by yourself :)
     create(createTalkDto: CreateTalkDto) {
         return "This action adds a new talk"
     }
