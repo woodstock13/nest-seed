@@ -50,6 +50,3 @@ or
 ```
 docker-compose up --build
 ```
-
-tart:live
-```
