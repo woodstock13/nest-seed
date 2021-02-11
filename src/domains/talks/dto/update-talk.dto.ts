@@ -1,12 +1,19 @@
-import {ApiProperty} from "@nestjs/swagger";
+import { ApiProperty } from "@nestjs/swagger"
+import { IsEmail, IsEnum, IsInt, Length, Max, Min } from "class-validator"
 
 export class UpdateTalkDto {
-     @ApiProperty({ type: String })
-     description: string;
-     @ApiProperty({ type: String })
-     format: string;
-     @ApiProperty({ type: String })
-     level: string;
-     @ApiProperty({ type: String })
-     day: string;
+    @ApiProperty({ type: String })
+    @Length(10, 20)
+    description: string
+
+    // between : 1(easy) to 4(hard)
+    @ApiProperty({ type: Number })
+    @IsInt()
+    @Min(0)
+    @Max(10)
+    level: number
+
+    @ApiProperty({ type: String })
+    @IsEmail()
+    contactEmail: string
 }
